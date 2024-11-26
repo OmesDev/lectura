@@ -87,7 +87,9 @@ const SocialButton = ({ provider, icon }: { provider: string; icon: string }) =>
       const { error } = await supabase.auth.signInWithOAuth({
         provider: provider.toLowerCase() as 'google',
         options: {
-          redirectTo: `${window.location.origin}/auth/callback`
+          redirectTo: process.env.NEXT_PUBLIC_SITE_URL 
+            ? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/callback`
+            : `${window.location.origin}/auth/callback`
         }
       });
       
