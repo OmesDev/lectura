@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import Image from "next/image";
 import { useSearchParams, useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
@@ -96,7 +96,7 @@ const SocialButton = ({ provider, icon }: { provider: string; icon: string }) =>
   </motion.button>
 );
 
-export default function AuthPage() {
+const AuthContent = () => {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -418,5 +418,17 @@ export default function AuthPage() {
         </motion.div>
       </div>
     </div>
+  );
+};
+
+export default function AuthPage() {
+  return (
+    <Suspense fallback={
+      <div className="h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500"/>
+      </div>
+    }>
+      <AuthContent />
+    </Suspense>
   );
 }
