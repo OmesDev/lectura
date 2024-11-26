@@ -10,8 +10,11 @@ export async function middleware(request: NextRequest) {
     data: { session },
   } = await supabase.auth.getSession()
 
-  // If there's no session and the user is trying to access the dashboard
-  if (!session && request.nextUrl.pathname.startsWith('/dashboard')) {
+  // If there's no session and the user is trying to access protected routes
+  if (!session && (
+    request.nextUrl.pathname.startsWith('/dashboard') ||
+    request.nextUrl.pathname.startsWith('/onboarding')
+  )) {
     return NextResponse.redirect(new URL('/auth', request.url))
   }
 
@@ -24,5 +27,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/dashboard/:path*', '/auth/:path*']
+  matcher: ['/dashboard/:path*', '/auth/:path*', '/onboarding/:path*']
 } 
