@@ -81,20 +81,40 @@ const FormField = ({
   </div>
 );
 
-const SocialButton = ({ provider, icon }: { provider: string; icon: string }) => (
-  <motion.button
-    whileHover={{ scale: 1.02 }}
-    whileTap={{ scale: 0.98 }}
-    type="button"
-    className="group relative flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/50 dark:bg-gray-900/50 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all duration-200"
-  >
-    <span className="relative z-10 flex items-center gap-2">
-      <Image src={icon} alt={provider} width={20} height={20} className="transition-transform group-hover:scale-110"/>
-      <span className="text-sm font-medium">{provider}</span>
-    </span>
-    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-200"/>
-  </motion.button>
-);
+const SocialButton = ({ provider, icon }: { provider: string; icon: string }) => {
+  const handleSocialLogin = async () => {
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: provider.toLowerCase() as 'google',
+        options: {
+          redirectTo: `${window.location.origin}/auth/callback`
+        }
+      });
+      
+      if (error) {
+        throw error;
+      }
+    } catch (error: any) {
+      toast.error(error?.message || `Failed to sign in with ${provider}`);
+    }
+  };
+
+  return (
+    <motion.button
+      onClick={handleSocialLogin}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      type="button"
+      className="group relative flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white/50 dark:bg-gray-900/50 border border-slate-200 dark:border-slate-800 hover:border-purple-500/50 transition-all duration-200"
+    >
+      <span className="relative z-10 flex items-center gap-2">
+        <Image src={icon} alt={provider} width={20} height={20} className="transition-transform group-hover:scale-110"/>
+        <span className="text-sm font-medium">Sign in with {provider}</span>
+      </span>
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-10 transition-opacity duration-200"/>
+    </motion.button>
+  );
+};
 
 const AuthContent = () => {
   const router = useRouter();
@@ -286,9 +306,8 @@ const AuthContent = () => {
                   className="space-y-5"
                 >
                   {/* Social Login Buttons */}
-                  <div className="grid grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4">
                     <SocialButton provider="Google" icon="/auth/google.svg" />
-                    <SocialButton provider="GitHub" icon="/auth/github.svg" />
                   </div>
 
                   <div className="relative">
