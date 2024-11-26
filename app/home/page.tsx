@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from 'react';
 
 const BackgroundGradient = () => (
-  <div className="absolute inset-0">
+  <div className="absolute inset-0 overflow-hidden">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(129,140,248,0.1),transparent,transparent)] dark:bg-[radial-gradient(circle_at_top_right,rgba(129,140,248,0.03),transparent,transparent)]"/>
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 dark:from-indigo-500/10 dark:via-purple-500/10 dark:to-pink-500/10 rounded-full blur-3xl"/>
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] max-w-[800px] aspect-square bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 dark:from-indigo-500/10 dark:via-purple-500/10 dark:to-pink-500/10 rounded-full blur-3xl"/>
     <div className="absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6,#D946EF,#EC4899)] opacity-5 mix-blend-multiply dark:opacity-10"/>
   </div>
 );
