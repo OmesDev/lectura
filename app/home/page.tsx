@@ -14,12 +14,19 @@ const BackgroundGradient = () => (
 const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void }) => (
   <button
     onClick={onClick}
-    className="relative h-10 w-10 md:hidden flex items-center justify-center"
+    className="relative h-12 w-12 md:hidden flex items-center justify-center rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors duration-200"
+    aria-label="Toggle menu"
   >
-    <div className="absolute w-5 h-5 flex flex-col justify-between transform transition-all duration-300">
-      <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}/>
-      <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}/>
-      <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}/>
+    <div className="absolute w-6 h-5 flex flex-col justify-between transform transition-all duration-300">
+      <span className={`w-full h-0.5 bg-current transform transition-all duration-300 origin-left ${
+        isOpen ? 'rotate-45 translate-x-px' : ''
+      }`}/>
+      <span className={`w-full h-0.5 bg-current transform transition-all duration-300 ${
+        isOpen ? 'opacity-0 translate-x-3' : ''
+      }`}/>
+      <span className={`w-full h-0.5 bg-current transform transition-all duration-300 origin-left ${
+        isOpen ? '-rotate-45 translate-x-px' : ''
+      }`}/>
     </div>
   </button>
 );
@@ -62,7 +69,7 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               className="relative z-10 flex items-center"
             >
-              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
+              <span className="text-2xl font-bold bg-gradient-to-br from-indigo-500 via-purple-500 to-pink-500 text-gradient">
                 Lectura
               </span>
             </motion.div>
@@ -126,36 +133,43 @@ export default function Home() {
               height: isMobileMenuOpen ? 'auto' : 0,
               opacity: isMobileMenuOpen ? 1 : 0
             }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden overflow-hidden bg-white dark:bg-black border-t border-slate-200/20 dark:border-slate-800/20"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="md:hidden overflow-hidden bg-white/80 dark:bg-black/80 backdrop-blur-lg border-t border-slate-200/20 dark:border-slate-800/20"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-6 py-4 space-y-3">
               {[
                 { name: 'Features', href: '#features' },
                 { name: 'Pricing', href: '#pricing' },
-                { name: 'Testimonials', href: '#testimonials' },              ].map((item) => (
-                <a
+                { name: 'Testimonials', href: '#testimonials' },
+              ].map((item) => (
+                <motion.a
                   key={item.name}
                   href={item.href}
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="block py-2 text-base font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                  className="block py-2 text-lg font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors relative group"
+                  whileTap={{ scale: 0.98 }}
                 >
-                  {item.name}
-                </a>
+                  <span className="relative">
+                    {item.name}
+                    <span className="absolute inset-x-0 -bottom-1 h-px bg-gradient-to-r from-purple-500/0 via-purple-500/70 to-purple-500/0 opacity-0 transition-opacity group-hover:opacity-100"/>
+                  </span>
+                </motion.a>
               ))}
-              <div className="pt-4 space-y-4">
-                <a
+              <div className="pt-3 space-y-3">
+                <motion.a
                   href="/auth?mode=login"
-                  className="block w-full text-center py-2 text-base font-medium hover:text-purple-600 dark:hover:text-purple-400 transition-colors"
+                  className="block w-full text-center py-3 px-6 rounded-2xl bg-white dark:bg-white text-black font-medium hover:bg-slate-50 transition-all duration-200"
+                  whileTap={{ scale: 0.98 }}
                 >
                   Sign in
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="/auth?mode=signup"
-                  className="block w-full text-center py-3 px-4 rounded-full bg-black dark:bg-white text-white dark:text-black font-medium hover:bg-gray-900 dark:hover:bg-gray-100 transition-colors"
+                  className="block w-full text-center py-3 px-6 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-200"
+                  whileTap={{ scale: 0.98 }}
                 >
                   Get Started
-                </a>
+                </motion.a>
               </div>
             </div>
           </motion.div>
@@ -163,7 +177,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-40 overflow-hidden">
+      <section className="relative pt-20 sm:pt-24 pb-20 overflow-hidden">
         <BackgroundGradient />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -347,7 +361,7 @@ export default function Home() {
       </section>
 
       {/* Social Proof Section */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-20 overflow-hidden">
         <BackgroundGradient />
         <motion.div 
           animate={{ 
@@ -376,7 +390,7 @@ export default function Home() {
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Enhanced Heading */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -596,7 +610,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced Features Section */}
-      <section id="features" className="relative py-32 overflow-hidden">
+      <section id="features" className="relative py-20 overflow-hidden">
         <BackgroundGradient />
         
         {/* Animated background elements */}
@@ -615,7 +629,7 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -807,7 +821,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced Pricing Section */}
-      <section id="pricing" className="relative py-32 overflow-hidden">
+      <section id="pricing" className="relative py-20 overflow-hidden">
         <BackgroundGradient />
         
         {/* Animated Orbs */}
@@ -826,7 +840,7 @@ export default function Home() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
-          <div className="text-center mb-20">
+          <div className="text-center mb-12">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -1091,7 +1105,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced CTA Section */}
-      <section className="relative py-32 overflow-hidden">
+      <section className="relative py-20 overflow-hidden">
         <BackgroundGradient />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -1159,7 +1173,12 @@ export default function Home() {
                       viewBox="0 0 24 24"
                       stroke="currentColor"
                     >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                      <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={2} 
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      />
                     </motion.svg>
                   </a>
                   <a
@@ -1212,27 +1231,28 @@ export default function Home() {
       </section>
 
       {/* Enhanced Footer Section */}
-      <footer className="relative pt-32 pb-12 overflow-hidden">
+      <footer className="relative pt-20 pb-12 overflow-hidden">
         <BackgroundGradient />
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           {/* Main Footer Content */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-12 mb-20">
-            {/* Brand Column */}
-            <div className="lg:col-span-2">
+          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 gap-8 lg:gap-12 mb-12">
+            {/* Brand Column - Make it full width on mobile */}
+            <div className="col-span-2 sm:col-span-2 lg:col-span-2">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="space-y-6"
+                className="space-y-4" // Reduced spacing
               >
                 <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
                   Lectura
                 </span>
-                <p className="text-slate-600 dark:text-slate-400 max-w-sm">
-                  Empowering students worldwide with AI-powered learning assistance. Transform your academic journey today.
+                <p className="text-sm text-slate-600 dark:text-slate-400 max-w-sm">
+                  Empowering students worldwide with AI-powered learning assistance.
                 </p>
-                <div className="flex gap-4">
+                {/* Social links - Make them more compact */}
+                <div className="flex gap-3">
                   {[
                     { icon: "twitter", href: "#" },
                     { icon: "facebook", href: "#" },
@@ -1242,10 +1262,10 @@ export default function Home() {
                     <a
                       key={i}
                       href={social.href}
-                      className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 hover:text-white transition-all duration-200"
+                      className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-600 dark:text-slate-400 hover:bg-gradient-to-r hover:from-indigo-500 hover:via-purple-500 hover:to-pink-500 hover:text-white transition-all duration-200"
                     >
                       <span className="sr-only">{social.icon}</span>
-                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         {/* Add appropriate social media icon paths */}
                       </svg>
                     </a>
@@ -1254,43 +1274,23 @@ export default function Home() {
               </motion.div>
             </div>
 
-            {/* Quick Links */}
+            {/* Footer Links - Update the mapping and spacing */}
             {[
               {
                 title: "Product",
-                links: [
-                  { name: "Features", href: "#features" },
-                  { name: "Pricing", href: "#pricing" },
-                  { name: "Demo", href: "#demo" },
-                  { name: "Changelog", href: "#changelog" }
-                ]
+                links: ["Features", "Pricing", "Demo"]
               },
               {
                 title: "Company",
-                links: [
-                  { name: "About Us", href: "#about" },
-                  { name: "Careers", href: "#careers" },
-                  { name: "Blog", href: "#blog" },
-                  { name: "Press Kit", href: "#press" }
-                ]
+                links: ["About", "Careers", "Blog"]
               },
               {
                 title: "Resources",
-                links: [
-                  { name: "Documentation", href: "#docs" },
-                  { name: "Help Center", href: "#help" },
-                  { name: "Community", href: "#community" },
-                  { name: "Tutorials", href: "#tutorials" }
-                ]
+                links: ["Help", "Docs", "Community"]
               },
               {
                 title: "Legal",
-                links: [
-                  { name: "Privacy", href: "#privacy" },
-                  { name: "Terms", href: "#terms" },
-                  { name: "Security", href: "#security" },
-                  { name: "Cookies", href: "#cookies" }
-                ]
+                links: ["Privacy", "Terms", "Security"]
               }
             ].map((column, i) => (
               <motion.div
@@ -1300,15 +1300,15 @@ export default function Home() {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 * i }}
               >
-                <h3 className="font-semibold mb-6">{column.title}</h3>
-                <ul className="space-y-4">
+                <h3 className="font-semibold mb-3 text-sm">{column.title}</h3>
+                <ul className="space-y-2">
                   {column.links.map((link, j) => (
                     <li key={j}>
                       <a
-                        href={link.href}
-                        className="text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200"
+                        href={`#${link.toLowerCase()}`}
+                        className="text-sm text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200"
                       >
-                        {link.name}
+                        {link}
                       </a>
                     </li>
                   ))}
@@ -1317,28 +1317,28 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Newsletter Section */}
+          {/* Newsletter Section - Make it more compact on mobile */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative py-12 px-8 rounded-3xl mb-20"
+            className="relative py-8 sm:py-12 px-6 sm:px-8 rounded-3xl mb-8 sm:mb-12"
           >
             <div className="absolute inset-0 bg-white/[0.02] dark:bg-white/[0.02] backdrop-blur-3xl rounded-3xl border border-slate-200/10 dark:border-slate-800/10"/>
             <div className="relative z-10 max-w-2xl mx-auto text-center">
-              <h3 className="text-2xl font-bold mb-4">Stay Updated</h3>
-              <p className="text-slate-600 dark:text-slate-400 mb-8">
+              <h3 className="text-xl sm:text-2xl font-bold mb-2 sm:mb-4">Stay Updated</h3>
+              <p className="text-sm text-slate-600 dark:text-slate-400 mb-6 sm:mb-8">
                 Subscribe to our newsletter for the latest features and updates.
               </p>
-              <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="flex-1 px-6 py-3 rounded-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:border-purple-500 transition-colors duration-200"
+                  className="flex-1 px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-white dark:bg-gray-900 border border-slate-200 dark:border-slate-800 focus:outline-none focus:border-purple-500 transition-colors duration-200 text-sm"
                 />
                 <button
                   type="submit"
-                  className="px-8 py-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-200"
+                  className="px-6 py-2 sm:px-8 sm:py-3 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white text-sm font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-200"
                 >
                   Subscribe
                 </button>
@@ -1346,38 +1346,26 @@ export default function Home() {
             </div>
           </motion.div>
 
-          {/* Bottom Bar */}
-          <div className="pt-8 border-t border-slate-200/10 dark:border-slate-800/10">
-            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+          {/* Bottom Bar - Simplify for mobile */}
+          <div className="pt-6 sm:pt-8 border-t border-slate-200/10 dark:border-slate-800/10">
+            <div className="flex flex-col sm:flex-row justify-between items-center gap-4 text-sm">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="text-sm text-slate-600 dark:text-slate-400"
+                className="text-slate-600 dark:text-slate-400 text-center sm:text-left"
               >
                 © {new Date().getFullYear()} Lectura. All rights reserved.
               </motion.div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex items-center gap-8"
-              >
-                <select className="bg-transparent text-sm text-slate-600 dark:text-slate-400 focus:outline-none">
-                  <option value="en">English (US)</option>
-                  <option value="es">Español</option>
-                  <option value="fr">Français</option>
-                </select>
-                <div className="flex items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
-                  <a href="#accessibility" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200">
-                    Accessibility
-                  </a>
-                  <span>•</span>
-                  <a href="#sitemap" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200">
-                    Sitemap
-                  </a>
-                </div>
-              </motion.div>
+              <div className="flex flex-wrap justify-center sm:justify-end items-center gap-4 text-sm text-slate-600 dark:text-slate-400">
+                <a href="#accessibility" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200">
+                  Accessibility
+                </a>
+                <span className="hidden sm:inline">•</span>
+                <a href="#sitemap" className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-200">
+                  Sitemap
+                </a>
+              </div>
             </div>
           </div>
         </div>

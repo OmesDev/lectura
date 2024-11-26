@@ -336,7 +336,7 @@ export default function Dashboard() {
   ]);
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-slate-50 dark:bg-black pb-16 lg:pb-0">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-slate-50 dark:bg-black pb-16 lg:pb-0 custom-scrollbar">
       <BackgroundGradient />
       
       {/* Mobile Header */}
@@ -399,8 +399,8 @@ export default function Dashboard() {
           </div>
         </motion.aside>
 
-        {/* Main Content */}
-        <main className="flex-1 p-4 lg:p-12">
+        {/* Main Content - Update padding and height */}
+        <main className="flex-1 p-4 lg:p-8 lg:pt-12">
           {/* Header */}
           <motion.div
             initial={{ y: -20, opacity: 0 }}
@@ -469,16 +469,16 @@ export default function Dashboard() {
             />
           </motion.div>
 
-          {/* Two Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6">
-            {/* AI Chat Section */}
+          {/* Two Column Layout - Update to use flex and height */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 lg:h-[calc(100vh-340px)]">
+            {/* AI Chat Section - Update height and overflow */}
             <div className="lg:col-span-2">
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
                 animate={{ y: 0, opacity: 1 }}
-                className="p-6 rounded-2xl bg-white dark:bg-gray-900/70 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-sm"
+                className="h-full p-6 rounded-2xl bg-white dark:bg-gray-900/70 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-sm flex flex-col"
               >
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-between mb-6 flex-shrink-0">
                   <h2 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
                     AI Study Assistant
                   </h2>
@@ -491,8 +491,8 @@ export default function Dashboard() {
                   </motion.button>
                 </div>
                 
-                {/* Chat Messages - Update spacing */}
-                <div className="space-y-4 lg:space-y-8 mb-4 lg:mb-8">
+                {/* Chat Messages - Update to use flex-grow and overflow */}
+                <div className="flex-grow overflow-y-auto space-y-4 lg:space-y-8 mb-4 lg:mb-8 custom-scrollbar">
                   {messages.map((message, index) => (
                     <ChatMessage
                       key={index}
@@ -502,8 +502,8 @@ export default function Dashboard() {
                   ))}
                 </div>
 
-                {/* Chat Input */}
-                <div className="relative">
+                {/* Chat Input - Add flex-shrink-0 */}
+                <div className="relative flex-shrink-0">
                   <input
                     type="text"
                     placeholder="Ask anything..."
@@ -518,13 +518,13 @@ export default function Dashboard() {
               </motion.div>
             </div>
 
-            {/* Recent Activity */}
+            {/* Recent Activity - Update height and overflow */}
             <motion.div
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
-              className="p-6 rounded-2xl bg-white dark:bg-gray-900/70 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-sm"
+              className="h-full p-6 rounded-2xl bg-white dark:bg-gray-900/70 border border-slate-200/50 dark:border-slate-800/50 backdrop-blur-sm flex flex-col"
             >
-              <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center justify-between mb-6 flex-shrink-0">
                 <h2 className="text-lg lg:text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-slate-200 bg-clip-text text-transparent">
                   Recent Activity
                 </h2>
@@ -536,7 +536,7 @@ export default function Dashboard() {
                   View All
                 </motion.button>
               </div>
-              <div className="space-y-2 lg:space-y-4">
+              <div className="flex-grow overflow-y-auto space-y-2 lg:space-y-4 custom-scrollbar">
                 <RecentActivity
                   icon="📚"
                   title="Completed Physics Chapter 5"
