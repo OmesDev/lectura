@@ -142,7 +142,7 @@ export default function Dashboard() {
     </div>
   )
 
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Array<{text: string; isAi: boolean}>>([
     { text: "Hello! How can I help you with your studies today?", isAi: true },
     { text: "I need help understanding quantum mechanics.", isAi: false },
     { text: "I'll help break down quantum mechanics into simpler concepts. Let's start with the basics.", isAi: true },

@@ -160,7 +160,7 @@ export default function AuthPage() {
         toast.success('Account created successfully!');
         router.push('/dashboard');
       }
-    } catch (error: any) {
+    } catch (error: Error | any) {
       toast.error(error?.message || 'An error occurred');
     } finally {
       setIsLoading(false);
