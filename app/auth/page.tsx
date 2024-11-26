@@ -7,6 +7,7 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '@/types/supabase'
 import { toast } from 'sonner'
+import Link from 'next/link';
 
 const supabase = createClientComponentClient<Database>()
 
@@ -193,6 +194,33 @@ const AuthContent = () => {
     <div className="h-screen overflow-hidden font-[family-name:var(--font-geist-sans)] bg-white dark:bg-black flex items-center justify-center relative">
       <BackgroundGradient />
       
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        className="absolute top-6 left-6 z-10"
+      >
+        <Link href="/">
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 dark:bg-white/10 backdrop-blur-sm text-white"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            <span className="text-sm">Back</span>
+          </motion.button>
+        </Link>
+      </motion.div>
+
       <div className="w-full max-w-5xl px-4 relative flex flex-col lg:flex-row items-center gap-8 lg:justify-end">
         {/* Left Side - Branding */}
         <motion.div 
@@ -271,14 +299,14 @@ const AuthContent = () => {
             />
             <div className="relative bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl rounded-2xl border border-slate-200/50 dark:border-slate-800/50 shadow-2xl shadow-purple-500/5 p-6">
               {/* Tab Switcher */}
-              <div className="flex gap-4 mb-6 p-1 bg-slate-100/50 dark:bg-slate-800/50 rounded-xl">
+              <div className="flex gap-4 mb-6">
                 <motion.button
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setIsLogin(true)}
-                  className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all duration-200
+                  className={`flex-1 py-3 px-6 text-sm font-medium rounded-full transition-all duration-200
                     ${isLogin 
-                      ? 'bg-white dark:bg-gray-900 text-purple-600 dark:text-purple-400 shadow-sm' 
-                      : 'text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400'
+                      ? 'bg-black dark:bg-white text-white dark:text-black hover:scale-105' 
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                 >
                   Sign In
@@ -286,10 +314,10 @@ const AuthContent = () => {
                 <motion.button
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setIsLogin(false)}
-                  className={`flex-1 py-2.5 text-sm font-medium rounded-lg transition-all duration-200
+                  className={`flex-1 py-3 px-6 text-sm font-medium rounded-full transition-all duration-200
                     ${!isLogin 
-                      ? 'bg-white dark:bg-gray-900 text-purple-600 dark:text-purple-400 shadow-sm' 
-                      : 'text-slate-600 dark:text-slate-400 hover:text-purple-600 dark:hover:text-purple-400'
+                      ? 'bg-black dark:bg-white text-white dark:text-black hover:scale-105' 
+                      : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-700'
                     }`}
                 >
                   Sign Up
@@ -377,10 +405,10 @@ const AuthContent = () => {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={isLoading}
-                    className="group relative w-full py-2.5 rounded-xl transition-all duration-200 disabled:opacity-70"
+                    className="group relative w-full py-3 px-6 rounded-full bg-black dark:bg-white text-white dark:text-black hover:scale-105 transition-all duration-200"
                   >
                     <motion.span 
-                      className="relative z-10 flex items-center justify-center text-white font-medium"
+                      className="relative z-10 flex items-center justify-center font-medium"
                       animate={isLoading ? { opacity: [1, 0.5, 1] } : {}}
                       transition={{ duration: 1, repeat: Infinity }}
                     >
@@ -404,8 +432,7 @@ const AuthContent = () => {
                         </>
                       )}
                     </motion.span>
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-100 group-hover:opacity-90 transition-opacity duration-200"/>
-                    <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 blur transition-opacity duration-200"/>
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 blur transition-opacity duration-200"/>
                   </motion.button>
                 </motion.form>
               </AnimatePresence>

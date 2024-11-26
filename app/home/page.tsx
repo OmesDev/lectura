@@ -27,6 +27,7 @@ const MenuButton = ({ isOpen, onClick }: { isOpen: boolean; onClick: () => void 
 export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isAnnual, setIsAnnual] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -47,7 +48,7 @@ export default function Home() {
             : 'bg-transparent border-b border-transparent'
         }`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <motion.div 
@@ -64,13 +65,12 @@ export default function Home() {
             <motion.div 
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="hidden md:flex items-center gap-1"
+              className="hidden md:flex items-center gap-1 ml-12"
             >
               {[
                 { name: 'Features', href: '#features' },
                 { name: 'Pricing', href: '#pricing' },
                 { name: 'Testimonials', href: '#testimonials' },
-                { name: 'Contact', href: '#contact' }
               ].map((item) => (
                 <a
                   key={item.name}
@@ -87,7 +87,7 @@ export default function Home() {
             <motion.div 
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
-              className="hidden md:flex items-center gap-4"
+              className="hidden md:flex items-center gap-4 ml-auto"
             >
               <a 
                 href="/auth?mode=login"
@@ -127,9 +127,7 @@ export default function Home() {
               {[
                 { name: 'Features', href: '#features' },
                 { name: 'Pricing', href: '#pricing' },
-                { name: 'Testimonials', href: '#testimonials' },
-                { name: 'Contact', href: '#contact' }
-              ].map((item) => (
+                { name: 'Testimonials', href: '#testimonials' },              ].map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
@@ -750,7 +748,7 @@ export default function Home() {
               {/* Button */}
               <a 
                 href="#get-started"
-                className="relative inline-flex items-center justify-center px-8 py-4 rounded-full bg-black dark:bg-white text-white dark:text-black hover:scale-105 transition-all duration-200"
+                className="relative inline-flex items-center justify-center px-8 py-4 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white font-medium hover:shadow-lg hover:shadow-purple-500/25 transition-all duration-200"
               >
                 <span className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 blur transition-opacity duration-200"/>
                 <span className="relative flex items-center gap-2 font-medium">
@@ -859,11 +857,22 @@ export default function Home() {
               viewport={{ once: true }}
               className="mt-8 flex items-center justify-center gap-4"
             >
-              <span className="text-sm text-slate-600 dark:text-slate-400">Monthly</span>
-              <button className="relative w-14 h-7 bg-slate-200 dark:bg-slate-800 rounded-full transition-colors hover:bg-slate-300 dark:hover:bg-slate-700">
-                <div className="absolute left-1 top-1 w-5 h-5 bg-white dark:bg-slate-200 rounded-full transition-transform"/>
+              <span className={`text-sm transition-colors duration-200 ${
+                !isAnnual ? 'text-purple-600 dark:text-purple-400 font-medium' : 'text-slate-600 dark:text-slate-400'
+              }`}>
+                Monthly
+              </span>
+              <button 
+                onClick={() => setIsAnnual(!isAnnual)}
+                className="relative w-14 h-7 bg-slate-200 dark:bg-slate-800 rounded-full transition-colors hover:bg-slate-300 dark:hover:bg-slate-700"
+              >
+                <div className={`absolute top-1 w-5 h-5 bg-white dark:bg-slate-200 rounded-full transition-transform duration-200 ${
+                  isAnnual ? 'translate-x-8' : 'translate-x-1'
+                }`}/>
               </button>
-              <span className="text-sm text-slate-600 dark:text-slate-400">
+              <span className={`text-sm transition-colors duration-200 ${
+                isAnnual ? 'text-purple-600 dark:text-purple-400 font-medium' : 'text-slate-600 dark:text-slate-400'
+              }`}>
                 Annual
                 <span className="ml-2 px-2 py-0.5 rounded-full text-xs bg-gradient-to-r from-green-500/10 to-emerald-500/10 text-green-600 dark:text-green-400">
                   Save 20%
@@ -893,7 +902,7 @@ export default function Home() {
               },
               {
                 name: "Pro",
-                price: "15",
+                price: isAnnual ? "12" : "15",
                 description: "Most popular for students",
                 gradient: "from-purple-500 to-violet-500",
                 features: [
@@ -909,7 +918,7 @@ export default function Home() {
               },
               {
                 name: "Team",
-                price: "49",
+                price: isAnnual ? "39" : "49",
                 description: "Perfect for study groups",
                 gradient: "from-pink-500 to-rose-500",
                 features: [
@@ -958,9 +967,18 @@ export default function Home() {
                       <span className="text-5xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                         ${plan.price}
                       </span>
-                      <span className="ml-2 text-slate-600 dark:text-slate-400">/month</span>
+                      <span className="ml-2 text-slate-600 dark:text-slate-400">
+                        /{isAnnual ? 'year' : 'month'}
+                      </span>
                     </div>
-                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">{plan.description}</p>
+                    {isAnnual && plan.price !== "0" && (
+                      <p className="mt-1 text-sm text-green-600 dark:text-green-400">
+                        Save 20% with annual billing
+                      </p>
+                    )}
+                    <p className="mt-2 text-sm text-slate-600 dark:text-slate-400">
+                      {plan.description}
+                    </p>
                   </div>
 
                   {/* Features */}
