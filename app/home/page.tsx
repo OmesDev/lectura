@@ -28,6 +28,7 @@ export default function Home() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAnnual, setIsAnnual] = useState(false);
+  const [onlineUsers, setOnlineUsers] = useState<string>("---");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -36,6 +37,11 @@ export default function Home() {
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const randomUsers = Math.floor(Math.random() * (3804 - 3200 + 1) + 3200);
+    setOnlineUsers(randomUsers.toLocaleString());
   }, []);
 
   return (
@@ -329,7 +335,9 @@ export default function Home() {
                     ))}
                   </div>
                   <div className="text-sm font-medium">
-                    <span className="text-purple-600 dark:text-purple-400">2,941</span> students online
+                    <span className="text-purple-600 dark:text-purple-400">
+                      {onlineUsers}
+                    </span> students online
                   </div>
                 </div>
               </motion.div>
