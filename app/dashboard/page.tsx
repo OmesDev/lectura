@@ -243,7 +243,7 @@ const MobileHeader = ({ user, handleSignOut }: { user: any; handleSignOut: () =>
   }, []);
 
   return (
-    <div className="sticky top-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 lg:hidden z-50">
+    <div className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-gray-900/80 backdrop-blur-xl border-b border-slate-200/50 dark:border-slate-800/50 lg:hidden z-50">
       <div className="flex items-center justify-between p-4 relative">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 flex items-center justify-center">
@@ -336,7 +336,7 @@ export default function Dashboard() {
   ]);
 
   return (
-    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-slate-50 dark:bg-black pb-16 lg:pb-0 custom-scrollbar">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] bg-slate-50 dark:bg-black pb-16 lg:pb-0 pt-[73px] lg:pt-0 custom-scrollbar">
       <BackgroundGradient />
       
       {/* Mobile Header */}
