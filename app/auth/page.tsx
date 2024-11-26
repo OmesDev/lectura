@@ -234,7 +234,7 @@ const AuthContent = () => {
             whileTap={{ scale: 0.95 }}
             className="inline-block mb-6"
           >
-            <span className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-4xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
               Lectura
             </span>
           </motion.a>

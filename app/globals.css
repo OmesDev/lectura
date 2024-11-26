@@ -11,9 +11,6 @@ body {
   color: var(--foreground);
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
-  overflow-x: hidden;
-  min-height: 100vh;
-  width: 100%;
 }
 
 @keyframes scroll {
@@ -32,30 +29,10 @@ body {
 }
 
 @layer utilities {
-  .gradient-box {
-    position: relative;
-    width: 100%;
-    max-width: 800px;
-    margin: 0 auto;
-    aspect-ratio: 16/9;
-  }
-
-  .gradient-box::before {
-    content: '';
-    display: block;
-    padding-bottom: 56.25%;
-  }
-}
-
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
-
-@media screen and (max-width: 768px) {
-  .gradient-box {
-    max-width: 90vw;
+  .text-gradient {
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
 }

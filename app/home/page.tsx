@@ -4,9 +4,9 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from 'react';
 
 const BackgroundGradient = () => (
-  <div className="absolute inset-0 overflow-hidden">
+  <div className="absolute inset-0">
     <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(129,140,248,0.1),transparent,transparent)] dark:bg-[radial-gradient(circle_at_top_right,rgba(129,140,248,0.03),transparent,transparent)]"/>
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[100vw] max-w-[800px] aspect-square bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 dark:from-indigo-500/10 dark:via-purple-500/10 dark:to-pink-500/10 rounded-full blur-3xl"/>
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 dark:from-indigo-500/10 dark:via-purple-500/10 dark:to-pink-500/10 rounded-full blur-3xl"/>
     <div className="absolute inset-0 bg-[linear-gradient(to_right,#8B5CF6,#D946EF,#EC4899)] opacity-5 mix-blend-multiply dark:opacity-10"/>
   </div>
 );
@@ -62,7 +62,7 @@ export default function Home() {
               animate={{ opacity: 1, x: 0 }}
               className="relative z-10 flex items-center"
             >
-              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+              <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
                 Lectura
               </span>
             </motion.div>
@@ -203,7 +203,7 @@ export default function Home() {
               transition={{ delay: 0.3 }}
             >
               <h1 className="text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
-                <span className="inline-block bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                <span className="inline-block bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
                   Your Academic
                 </span>
                 <br/>
@@ -211,7 +211,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="inline-block bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 bg-clip-text text-transparent"
+                  className="inline-block bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-gradient"
                 >
                   Success Partner
                 </motion.span>
@@ -395,7 +395,7 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient"
             >
               Empowering Students Globally
             </motion.h2>
@@ -468,7 +468,7 @@ export default function Home() {
                   <div className={`w-12 h-12 rounded-xl bg-gradient-to-r ${stat.color} flex items-center justify-center text-white mb-4 rotate-3 group-hover:rotate-6 transition-transform duration-200`}>
                     {stat.icon}
                   </div>
-                  <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent mb-2 group-hover:scale-105 transition-transform duration-200`}>
+                  <div className={`text-4xl font-bold bg-gradient-to-r ${stat.color} text-gradient mb-2 group-hover:scale-105 transition-transform duration-200`}>
                     {stat.number}
                   </div>
                   <div className="text-sm text-slate-600 dark:text-slate-400">
@@ -504,7 +504,7 @@ export default function Home() {
                   <div className="w-8 h-8 rounded-full bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 flex items-center justify-center">
                     <span className="text-lg">🎓</span>
                   </div>
-                  <span className="text-sm font-medium bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                  <span className="text-sm font-medium bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
                     {uni}
                   </span>
                 </motion.div>
@@ -633,7 +633,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient"
             >
               Everything You Need to Excel
             </motion.h2>
@@ -844,7 +844,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+              className="text-4xl sm:text-5xl font-bold mb-6 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient"
             >
               Choose Your Perfect Plan
             </motion.h2>
@@ -972,7 +972,7 @@ export default function Home() {
                   {/* Price */}
                   <div className="mb-6">
                     <div className="flex items-baseline">
-                      <span className="text-5xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                      <span className="text-5xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
                         ${plan.price}
                       </span>
                       <span className="ml-2 text-slate-600 dark:text-slate-400">
@@ -1122,7 +1122,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 }}
-                  className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent"
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-8 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient"
                 >
                   Start Your Academic Journey Today
                 </motion.h2>
@@ -1226,7 +1226,7 @@ export default function Home() {
                 viewport={{ once: true }}
                 className="space-y-6"
               >
-                <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
                   Lectura
                 </span>
                 <p className="text-slate-600 dark:text-slate-400 max-w-sm">

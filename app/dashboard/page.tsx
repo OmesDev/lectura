@@ -162,7 +162,7 @@ export default function Dashboard() {
         >
           {/* Logo */}
           <div className="px-4 py-6 mb-8">
-            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <span className="text-2xl font-bold bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-gradient">
               Lectura
             </span>
           </div>
